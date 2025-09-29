@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Dependencies
+venv/
+env/
+.env
+
+# Application-specific
+api.key
+refresh-tokens.json
+ax.fp

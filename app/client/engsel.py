@@ -1,5 +1,6 @@
 import os, json, uuid, requests, time
 from datetime import datetime, timezone, timedelta
+from typing import Union
 
 from app.client.encrypt import encryptsign_xdata, java_like_timestamp, ts_gmt7_without_colon, ax_api_signature, decrypt_xdata, API_KEY, get_x_signature_payment, build_encrypted_field, load_ax_fp, ax_device_id
 
@@ -283,8 +284,8 @@ def get_family_v2(
     api_key: str,
     tokens: dict,
     family_code: str,
-    is_enterprise: bool | None = None,
-    migration_type: str | None = None
+    is_enterprise: Union[bool, None] = None,
+    migration_type: Union[str, None] = None
 ) -> dict:
     print("Fetching package family...")
     
@@ -681,8 +682,8 @@ def get_package_details(
     variant_code: str,
     option_order: int,
     is_enterprise: bool,
-    migration_type: str | None = None
-) -> dict | None:
+    migration_type: Union[str, None] = None
+) -> Union[dict, None]:
     family_data = get_family_v2(api_key, tokens, family_code, is_enterprise, migration_type)
     if not family_data:
         print(f"Gagal mengambil data family untuk {family_code}.")
