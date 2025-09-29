@@ -1,11 +1,7 @@
-import os
 import sys
-from dotenv import load_dotenv
+from app.util import manual_load_dotenv
+manual_load_dotenv()
 
-# Explicitly load .env file from the project root
-project_dir = os.path.dirname(os.path.abspath(__file__))
-dotenv_path = os.path.join(project_dir, '.env')
-load_dotenv(dotenv_path=dotenv_path)
 from datetime import datetime
 
 # Import UI components from app.menus

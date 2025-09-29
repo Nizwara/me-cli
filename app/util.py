@@ -2,6 +2,32 @@ import os
 import sys
 import requests
 
+def manual_load_dotenv():
+    """
+    Manually loads environment variables from a .env file in the project root.
+    This is a robust fallback if the python-dotenv library fails.
+    """
+    try:
+        project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        dotenv_path = os.path.join(project_dir, '.env')
+
+        if not os.path.exists(dotenv_path):
+            # print("No .env file found, skipping manual load.")
+            return
+
+        with open(dotenv_path) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, value = line.split('=', 1)
+                    key = key.strip()
+                    value = value.strip().strip('"\'') # Remove quotes
+                    os.environ.setdefault(key, value)
+        # print(".env file manually loaded.")
+    except Exception as e:
+        print(f"Error manually loading .env file: {e}")
+
+
 # Load API key from text file named api.key
 def load_api_key() -> str:
     if os.path.exists("api.key"):
