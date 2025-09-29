@@ -25,6 +25,8 @@ Example:
         main()
 """
 from dotenv import load_dotenv
+load_dotenv()
+
 from app.service.auth import AuthInstance
 from app.core.account import (
     list_accounts,
@@ -42,7 +44,6 @@ def initialize_bot():
     This must be called once before any other bot functions.
     """
     print("Initializing bot...")
-    load_dotenv()
     AuthInstance.load_tokens()
     print("Bot initialized.")
 
