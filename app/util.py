@@ -54,6 +54,16 @@ def ensure_api_key() -> str:
     Always verifies the key. Saves only if valid.
     Exits the program if invalid or empty.
     """
+    # Try to load from environment variable first
+    api_key_from_env = os.getenv("API_KEY")
+    if api_key_from_env:
+        print("API key loaded from environment variable.")
+        if verify_api_key(api_key_from_env):
+            return api_key_from_env
+        else:
+            print("API key from environment variable is invalid. Please check your .env file.")
+            sys.exit(1)
+
     # Try to load an existing key
     current = load_api_key()
     if current:
