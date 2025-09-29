@@ -24,8 +24,13 @@ Example:
     if __name__ == "__main__":
         main()
 """
+import os
 from dotenv import load_dotenv
-load_dotenv()
+
+# Explicitly load .env file from the project root
+project_dir = os.path.dirname(os.path.abspath(__file__))
+dotenv_path = os.path.join(project_dir, '.env')
+load_dotenv(dotenv_path=dotenv_path)
 
 from app.service.auth import AuthInstance
 from app.core.account import (
